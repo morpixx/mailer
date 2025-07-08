@@ -14,6 +14,7 @@ services:
       - redis
     volumes:
       - .:/mailer
+    working_dir: /mailer
     command: >
       sh -c "
         alembic upgrade head &&
