@@ -15,9 +15,13 @@ Session = sessionmaker(bind=engine)
 def send_email_batch():
     session = Session()
     recipients = get_pending_recipients(session)
+    print(f"Знайдено {len(recipients)} email-ів для розсилки")  # Додаємо лог
     for recipient in recipients:
         account = get_gmail_account(session)
         if not account:
+            print("Немає доступних акаунтів для відправки")
             break
-        send_email(recipient, account, session)
+        print(f"Відправляю на {recipient.email} з акаунта {account.email}")  # Додаємо лог
+        status = send_email(recipient, account, session)
+        print(f"Результат для {recipient.email}: {status}")  # Додаємо лог
     session.close()

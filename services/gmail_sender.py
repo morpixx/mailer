@@ -18,6 +18,7 @@ def build_gmail_service(account):
     return build("gmail", "v1", credentials=creds)
 
 def send_email(recipient, account, session):
+    print(f"Починаю відправку на {recipient.email} через {account.email}")
     service = build_gmail_service(account)
     context = {"email": recipient.email}
     html = render_template("airdrop.html", context)
@@ -60,4 +61,5 @@ def send_email(recipient, account, session):
         recipient.status = "failed"
     session.commit()
     time.sleep(2)
+    print(f"Відправка завершена для {recipient.email}, статус: {status}")
     return status
