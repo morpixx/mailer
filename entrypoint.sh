@@ -11,4 +11,4 @@ python cli/import_gmail_accounts_txt.py || true
 python cli/add_emails_from_file.py || true
 
 # Запуск celery worker
-celery -A tasks.send_email_batch worker --loglevel=info
+celery -A tasks.send_email_batch worker --loglevel=info --concurrency=5
