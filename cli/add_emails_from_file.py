@@ -8,6 +8,7 @@ from models.email_recipient import EmailRecipient, EmailStatus
 from config import DATABASE_URL
 
 def add_emails_from_file(filename):
+    print(f"Відкриваю файл: {filename}")  # Додаємо цей рядок для перевірки
     engine = create_engine(DATABASE_URL)
     Session = sessionmaker(bind=engine)
     session = Session()
